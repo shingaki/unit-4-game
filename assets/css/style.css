@@ -1,0 +1,117 @@
+/*-- background image\*/
+/*body {*/
+    /*background: url("./../images/starWarsAircraft.png") no-repeat;*/
+/*}*/
+
+.main-header {
+    font-size: xx-large;
+    font-family: "Bodoni 72 Oldstyle";
+    text-align: center;
+}
+
+.player-image-1 {
+    width: 50%;
+    heigth: 50%;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+
+.text-1 {
+    position: relative;
+    z-index: 2;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-1 {
+    position: relative;
+}
+
+.bottomcenter-1 {
+    position: absolute;
+    bottom: 25px;
+}
+
+
+.player-image-2 {
+    width: 65%;
+    heigth: 65%;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+
+.text-2 {
+    position: relative;
+    z-index: 2;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-2 {
+    position: relative;
+}
+
+.bottomcenter-2 {
+    position: absolute;
+    bottom: 25px;
+}
+
+.player-image-3 {
+    width: 70%;
+    heigth: 70%;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+
+.text-3 {
+    position: relative;
+    z-index: 2;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-3 {
+    position: relative;
+}
+
+.bottomcenter-3 {
+    position: absolute;
+    bottom: 25px;
+}
+
+
+.player-image-4 {
+    width: 90%;
+    heigth: 90%;
+    border: 5px solid black;
+    padding: 20px;
+}
+
+
+.text-4 {
+    position: relative;
+    z-index: 2;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-4 {
+    position: relative;
+}
+
+.bottomcenter-4 {
+    position: absolute;
+    bottom: 25px;
+}
+
+
+
+
+
