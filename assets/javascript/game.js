@@ -34,6 +34,16 @@ $(document).ready(function() {
 
 function gameStart() {
 
+    $("#restart").hide();
+
+
+    $("#row-four").text("");
+    $("#row-five").text("");
+    $("#row-six").text("");
+
+    $("#row-one").empty();
+
+
     for (var i = 0; players.name.length > i; i++) {
 
         var charDiv = $("<div>");
@@ -50,6 +60,14 @@ function gameStart() {
 
 
     }
+
+    for (var j = 0; players.name.length > j; j++) {
+        $("#"+players.name[j]).on("click", function () {
+            myCharacter(this);
+
+        });
+    }
+
     $("#attack").on("click", function() {
         //alert("Click the attack button");
 
@@ -96,12 +114,12 @@ function gameStart() {
 
 gameStart();
 
-for (var j = 0; players.name.length > j; j++) {
-    $("#"+players.name[j]).on("click", function () {
-        myCharacter(this);
-
-    });
-}
+// for (var j = 0; players.name.length > j; j++) {
+//     $("#"+players.name[j]).on("click", function () {
+//         myCharacter(this);
+//
+//     });
+// }
 
 
 //
@@ -312,6 +330,16 @@ function buildAvailableEnemies() {
                     }
                 }
                 if (gameOver === true) {
+
+                        $("#restart").show();
+
+                        $("#restart").on("click", function() {
+                            //alert("Click the attack button");
+
+
+                            gameStart();
+                        })
+
                     buildMyDefender();
 
                 }
