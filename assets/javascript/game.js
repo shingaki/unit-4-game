@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
-    var characterID = -1;
-    var defenderID = -1;
-    var gameRound = 0;
-    var gameOver = false;
+        var characterID = -1;
+        var defenderID = -1;
+        var gameRound = 0;
+        var gameOver = false;
 
 
-   // check to xee if the first player was chosen for the character
+        // check to xee if the first player was chosen for the character
 
 
 
@@ -23,287 +23,180 @@ $(document).ready(function() {
             };
 
 // currentStatus
-    // P = Player (beginning of game)
-    // C = Character
-    // D = Defender
-    // L = Loser
-    // E = Enemy Available to Fight
+        // P = Player (beginning of game)
+        // C = Character
+        // D = Defender
+        // L = Loser
+        // E = Enemy Available to Fight
 
 
 
+// set all characters to start the game
+// initialize all message areas
+        function gameStart() {
 
-function gameStart() {
+            $("#restart").hide();
+            $("#row-four").text("");
+            $("#row-five").text("");
+            $("#row-six").text("");
 
-    $("#restart").hide();
-
-
-    $("#row-four").text("");
-    $("#row-five").text("");
-    $("#row-six").text("");
-
-    $("#row-one").empty();
-
-
-    for (var i = 0; players.name.length > i; i++) {
-
-        var charDiv = $("<div>");
-
-        // charDiv.attr("id", "player-" + i);
-        charDiv.attr("id", players.name[i]);
-
-        charDiv.addClass("col-sm-3 player-img-border text-center");
-
-        buildCharacterDiv(charDiv,i);
-
-        $("#row-one").append(charDiv);
+            $("#row-one").empty();
 
 
+            for (var i = 0; players.name.length > i; i++) {
 
-    }
+                var charDiv = $("<div>");
 
-    for (var j = 0; players.name.length > j; j++) {
-        $("#"+players.name[j]).on("click", function () {
-            myCharacter(this);
+                // charDiv.attr("id", "player-" + i);
+                charDiv.attr("id", players.name[i]);
 
-        });
-    }
+                charDiv.addClass("col-sm-3 player-img-border text-center");
 
-    $("#attack").on("click", function() {
-        //alert("Click the attack button");
+                buildCharacterDiv(charDiv,i);
+
+                $("#row-one").append(charDiv);
 
 
-        attackEnemy();
-    })
 
-}
+            }
+
+            for (var j = 0; players.name.length > j; j++) {
+                $("#"+players.name[j]).on("click", function () {
+                    myCharacter(this);
+
+                });
+            }
+
+            $("#attack").on("click", function() {
+
+
+                attackEnemy();
+            })
+
+        }
 
         function buildCharacterDiv(theDiv,i)
         {
 
             var playerName = $("<div>");
-
             playerName.addClass("text-1");
-
             playerName.text(players.name[i]);
-
             var charImage = $("<img>");
-
             charImage.addClass("player-image-1");
-
             charImage.attr("src", "./assets/images/" + players.image[i]);
-
             var healthPointsRow = $("<div>");
-
             healthPointsRow.addClass("row text-1")
-
             var healthPointsCol = $("<div>");
             healthPointsCol.attr("id", "healthPoints" + [i]);
-
             healthPointsCol.addClass("col-sm-12 bottomcenter-1");
-
             healthPointsCol.text(players.origHealthPoints[i]);
-
             healthPointsRow.append(healthPointsCol);
-
             theDiv.append(playerName);
-
             theDiv.append(charImage);
-
             theDiv.append(healthPointsRow);
         }
 
 
-gameStart();
-
-// for (var j = 0; players.name.length > j; j++) {
-//     $("#"+players.name[j]).on("click", function () {
-//         myCharacter(this);
-//
-//     });
-// }
+        gameStart();
 
 
-//
-function myCharacter(myChar) {
-    // alert($(myChar).attr("id"));
-
-    for (var i = 0; players.name.length > i; i++) {
-
-        if (players.name[i] === $(myChar).attr("id")) {
-            players.currentState[i] = 'C';
-
-            characterID = i;
-
-            //alert("This player's current state: " + players.currentState[i]);
-        }
-        //$("#"+myChar).off("click");
-
-    }
-
-    buildMyCharacter();
-    buildAvailableEnemies();
-    // buildMyDefender();
-
-    // for (var j = 0; players.name.length > j; j++) {
-    //
-    //     alert("YET ANOTHER ALERT");
-    //
-    //     alert($("#e-"+players.name[j]).attr("id"));
-    //
-    //     $("#e-"+players.name[j]).on("click", function () {
-    //         //alert($(this).attr("id"));
-    //
-    //         myEnemy(this);
-    //         buildAvailableEnemies();
-    //
-    //
-    //         $("#attack").on("click", function() {
-    //             //alert("Click the attack button");
-    //
-    //             attackEnemy();
-    //         })
-    //
-    //     });
-    //}
-    // buildMyDefender();
-
-}
-
-function buildAvailableEnemies() {
-
-    //alert('Calling BuildAvailableEnemies');
-    $("#row-two").empty();
-
-    for (var i = 0; players.name.length > i; i++) {
-
-        if (players.currentState[i] === "P")
-        {
-
-            // alert ("in the if statement");
-            var charDiv = $("<div>");
-
-            // charDiv.attr("id", "player-" + i);
-            charDiv.attr("id", "e-"+players.name[i]);
-
-            charDiv.addClass("col-sm-3 player-img-border text-center");
-
-
-            //alert("Did it work?");
-            buildCharacterDiv(charDiv,i);
-            //alert("Yes!!!!!");
-
-            $("#row-two").append(charDiv);
-
-        }
-
-        }
-    for (var j = 0; players.name.length > j; j++) {
-
-        $("#e-"+players.name[j]).on("click", function () {
-
-            myEnemy(this);
+        function myCharacter(myChar) {
+            for (var i = 0; players.name.length > i; i++) {
+                if (players.name[i] === $(myChar).attr("id")) {
+                    players.currentState[i] = 'C';
+                    characterID = i;
+                }
+            }
+            buildMyCharacter();
             buildAvailableEnemies();
+        }
+
+        function buildAvailableEnemies() {
+            $("#row-two").empty();
+            for (var i = 0; players.name.length > i; i++) {
+                if (players.currentState[i] === "P") {
+                    var charDiv = $("<div>");
+                    charDiv.attr("id", "e-" + players.name[i]);
+                    charDiv.addClass("col-sm-3 player-img-border text-center");
+                    buildCharacterDiv(charDiv, i);
+                    $("#row-two").append(charDiv);
+                }
+            }
 
 
-        });
+            for (var j = 0; players.name.length > j; j++) {
+                $("#e-" + players.name[j]).on("click", function () {
+                    if (defenderID < 0) {
+                        myEnemy(this);
+                        buildAvailableEnemies();
+                        //$("#e-"+players.name[j]).unbind("click");
+                    }
+                });
+            };
 
-
-    };
-}
+        }
 
 
 
 //
         function myEnemy(theEnemy) {
-            //alert($(theEnemy).attr("id"));
             $("#row-six").text("");
-
-
             for (var i = 0; players.name.length > i; i++) {
-
                 if ("e-" +players.name[i] === $(theEnemy).attr("id")) {
                     players.currentState[i] = 'D';
-
-                    //alert("This player's current state: " + players.currentState[i]);
                     buildMyDefender();
-
                     defenderID = i;
+                    $("#row-four").text("");
+                    $("#row-five").text("");
+                    $("#row-six").text("");
                 }
-
             }
-
-
-
         }
 
 
         function buildMyCharacter() {
+            $("#row-one").empty();
+            $("#all-characters").text("");
+            $("#your-character").text("Your Character");
 
-                $("#row-one").empty();
-                $("#all-characters").text("");
-                $("#your-character").text("Your Character");
-
-                for (var i = 0; players.name.length > i; i++)
+            for (var i = 0; players.name.length > i; i++)
+            {
+                if (players.currentState[i] === "C")
                 {
-                    // alert("Current State = " + players.currentState[i] + " " + i);
-
-                    if (players.currentState[i] === "C")
-                    {
-                        // alert ("in the if statement");
-                        var charDiv = $("<div>");
-
-                        // charDiv.attr("id", "player-" + i);
-                        charDiv.attr("id", "c-"+players.name[i]);
-
-                        charDiv.addClass("col-sm-3 player-img-border text-center");
-
-                        // charDiv.attr("onClick", chooseCharacter(this));
-
-                        buildCharacterDiv(charDiv, i);
-
-                        $("#row-one").append(charDiv);
-                    }
+                    var charDiv = $("<div>");
+                    charDiv.attr("id", "c-"+players.name[i]);
+                    charDiv.addClass("col-sm-3 player-img-border text-center");
+                    buildCharacterDiv(charDiv, i);
+                    $("#row-one").append(charDiv);
                 }
+            }
         }
 
         function buildMyDefender() {
 
             $("#row-three").empty();
-
-            // alert("Build Defender");
-
             for (var i = 0; players.name.length > i; i++)
             {
-                //alert("Defender loop - Current State = " + players.currentState[i] + " " + i);
-
                 if (players.currentState[i] === "D")
                 {
-                    // alert ("in the if statement");
                     var charDiv = $("<div>");
-
-                    // charDiv.attr("id", "player-" + i);
                     charDiv.attr("id", "d-"+players.name[i]);
-
                     charDiv.addClass("col-sm-3 player-img-border text-center");
-
-                    // charDiv.attr("onClick", chooseCharacter(this));
-
                     buildCharacterDiv(charDiv, i);
-
                     $("#row-three").append(charDiv);
                 }
             }
         }
 
         function attackEnemy() {
-
-
             var gameRoundOver = false;
             if (gameOver) {
                 console.log("Game is over");
             }
             else if (defenderID < 0){
-                alert("Please choose a defender");
+                $("#row-four").text("Please choose another defender!");
+                $("#row-five").text("");
+                $("#row-six").text("");
             }
             else {
                 gameRound++;
@@ -313,39 +206,47 @@ function buildAvailableEnemies() {
                 $("#healthPoints" + defenderID).text(players.currentPoints[defenderID]);
                 $("#healthPoints" + characterID).text(players.currentPoints[characterID]);
                 //console.log("character=" + players.currentPoints[characterID]);
-                $("#row-four").text("You attacked " + players.name[defenderID] +" for " + players.currentPoints[characterID] + " damage.");
-                $("#row-five").text(players.name[defenderID] + " attacked you back for " + players.currentPoints[defenderID] + " damage.");
-                //console.log("defender=" + players.currentPoints[defenderID]);
+                $("#row-four").text("You attacked " + players.name[defenderID] +" for " + players.attackPower[characterID] * gameRound + " damage.");
+                $("#row-five").text(players.name[defenderID] + " attacked you back for " + players.counterAttackPower[defenderID] + " damage.");
+                console.log("character points =" + players.currentPoints[characterID]);
+                console.log("defender points =" + players.currentPoints[defenderID]);
 
-                if (players.currentPoints[defenderID] <= 0) {
-                    //alert("defender is out!!!!")
+                if (players.currentPoints[defenderID] <= 0 && players.currentPoints[defenderID] < players.currentPoints[characterID]) {
                     players.currentState[defenderID] = "L";
-                    players.currentPoints[characterID] = players.origHealthPoints[characterID]
+                    players.currentPoints[characterID] = players.origHealthPoints[characterID];
+                    $("#healthPoints" + characterID).text(players.currentPoints[characterID]);
                     gameRoundOver = true;
                     gameOver = anyEnemiesAvailable();
 
                 } else {
 
-                    if (players.currentPoints[characterID] <= 0) {
-                        alert("Character  is out!!!!")
+                    if (players.currentPoints[characterID] <= 0 && players.currentPoints[characterID] < players.currentPoints[defenderID]) {
                         players.currentState[characterID] = "L";
                         gameRoundOver = true;
                         gameOver = true;
                     }
                 }
                 if (gameOver === true) {
-                        $("#attack").hide();
-                        $("#row-four").text("");
-                        $("#row-five").text("");
-                        $("#row-six").text("You defeat all enemies");
+                    $("#attack").hide();
+                    $("#row-four").text("");
+                    $("#row-five").text("");
+                    console.log("character = " + players.currentState[characterID]);
+                    console.log("defender = " + players.currentState[defenderID]);
+                    if(players.currentState[characterID] === "L")
+                    {
+                        $("#row-six").text(players.name[defenderID]+" Won!!!! GAME OVER!!!");
+                    }
+                    else
+                    {
+                        $("#row-six").text(players.name[characterID]+", You Won!!!! GAME OVER!!!");
+                    }
 
-                        $("#restart").show();
 
-                        $("#restart").on("click", function() {
-                            //alert("Click the attack button");
-                            location.reload(true);
-                            //gameStart();
-                        })
+                    $("#restart").show();
+
+                    $("#restart").on("click", function() {
+                        location.reload(true);
+                    })
 
                     buildMyDefender();
 
@@ -365,27 +266,27 @@ function buildAvailableEnemies() {
             }
 
         }
-function anyEnemiesAvailable()
-{
-    moreEnemies = true;
-    for (var i = 0; players.name.length > i; i++)
-    {
-
-        if (players.currentState[i] === "P")
+        function anyEnemiesAvailable()
         {
-           moreEnemies = false;
+            moreEnemies = true;
+            for (var i = 0; players.name.length > i; i++)
+            {
+
+                if (players.currentState[i] === "P")
+                {
+                    moreEnemies = false;
+                }
+            }
+            return moreEnemies;
         }
+
+
+
+
+
+
+
     }
-    return moreEnemies;
-}
-
-
-
-
-
-
-
-}
 );
 
 

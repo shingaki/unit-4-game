@@ -7,11 +7,13 @@
     font-size: xx-large;
     font-family: "Bodoni 72 Oldstyle";
     text-align: center;
+    color: black;
+    margin-top: 50px;
 }
 
 .player-image-1 {
-    width: 65%;
-    heigth: 65%;
+    width: 50%;
+    heigth: 50%;
     border: 5px solid black;
     padding: 20px;
 }
@@ -111,6 +113,49 @@
     position: absolute;
     bottom: 25px;
 }
+
+
+body, html {
+    height: 100%;
+}
+
+
+.bg {
+    background-image: url("../images/hungerGamesBackground_2.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+ }
+
+.chgtextcolor {
+    color: black;
+}
+
+
+/*#img-as-background {*/
+    /*position: relative;*/
+    /*overflow: hidden;*/
+/*}*/
+
+/*#img-as-background .container {*/
+    /*height: 100%;*/
+    /*padding: 20px;*/
+/*}*/
+
+#img-as-background img {
+    position: absolute;
+    width: 100%;
+    height: 140%;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.65;
+    background-position: center;
+}
+
+
+
 
 
 
