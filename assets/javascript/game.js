@@ -97,6 +97,7 @@ function gameStart() {
             healthPointsRow.addClass("row text-1")
 
             var healthPointsCol = $("<div>");
+            healthPointsCol.attr("id", "healthPoints" + [i]);
 
             healthPointsCol.addClass("col-sm-12 bottomcenter-1");
 
@@ -309,12 +310,15 @@ function buildAvailableEnemies() {
                 console.log("Another around" + gameRound);
                 players.currentPoints[characterID] -= players.counterAttackPower[defenderID];
                 players.currentPoints[defenderID] -= players.attackPower[characterID] * gameRound;
-                console.log("character=" + players.currentPoints[characterID]);
+                $("#healthPoints" + defenderID).text(players.currentPoints[defenderID]);
+                $("#healthPoints" + characterID).text(players.currentPoints[characterID]);
+                //console.log("character=" + players.currentPoints[characterID]);
                 $("#row-four").text("You attacked " + players.name[defenderID] +" for " + players.currentPoints[characterID] + " damage.");
                 $("#row-five").text(players.name[defenderID] + " attacked you back for " + players.currentPoints[defenderID] + " damage.");
-                console.log("defender=" + players.currentPoints[defenderID]);
+                //console.log("defender=" + players.currentPoints[defenderID]);
+
                 if (players.currentPoints[defenderID] <= 0) {
-                    alert("defender is out!!!!")
+                    //alert("defender is out!!!!")
                     players.currentState[defenderID] = "L";
                     players.currentPoints[characterID] = players.origHealthPoints[characterID]
                     gameRoundOver = true;
@@ -330,14 +334,17 @@ function buildAvailableEnemies() {
                     }
                 }
                 if (gameOver === true) {
+                        $("#attack").hide();
+                        $("#row-four").text("");
+                        $("#row-five").text("");
+                        $("#row-six").text("You defeat all enemies");
 
                         $("#restart").show();
 
                         $("#restart").on("click", function() {
                             //alert("Click the attack button");
-
-
-                            gameStart();
+                            location.reload(true);
+                            //gameStart();
                         })
 
                     buildMyDefender();
